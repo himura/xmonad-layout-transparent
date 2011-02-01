@@ -1,0 +1,10 @@
+You can use this module in your ~/.xmonad/xmonad.hs
+
+> import XMonad.Layout.Transparent
+
+Then edit your layoutHook
+
+> myLayouts = (fadeIn Full) ||| (fadeOut Circle)
+>       fadeOut = withTransp fadeAmount
+>       fadeIn  = withTransp 0xffffffff
+> main = xmonad defaultConfig { layoutHook = myLayout }
