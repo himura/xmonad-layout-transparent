@@ -1,0 +1,20 @@
+name:               xmonad-layout-transparent
+version:            0.0.1
+synopsis:           Third party extensions for xmonad named XMonad.Layout.Transparent
+description:
+    Third party layout modifier to xmonad, a tiling window manager for X.
+    .
+
+category:           System
+author:             Takahiro Himura
+maintainer:         taka@himura.jp
+extra-source-files: README
+cabal-version:      >= 1.2
+build-type:         Simple
+
+library
+    build-depends: base >= 4,
+                   xmonad >= 0.9.1,
+                   xmonad-contrib >= 0.9.1
+
+    exposed-modules:    XMonad.Layout.Transparent
