@@ -1,4 +1,4 @@
-{-# LANGUAGE MultiParamTypeClasses, TypeSynonymInstances, FlexibleContexts #-}
+{-# LANGUAGE MultiParamTypeClasses, TypeSynonymInstances, FlexibleContexts, DeriveDataTypeable, PatternGuards #-}
 ----------------------------------------------------------------------------
 -- |
 -- Module      :  XMonad.Layout.Transparent
@@ -12,6 +12,7 @@
 
 module XMonad.Layout.Transparent (
         withTransp,
+        TransparentMsg(..),
     ) where
 
 import XMonad
@@ -20,9 +21,17 @@ import XMonad.Layout.LayoutModifier
 import XMonad.Hooks.FadeInactive(fadeOut)
 import Data.List
 
+data TransparentMsg = SetOpacity Rational deriving (Show, Read, Typeable)
+instance Message TransparentMsg
+
 data Transparent a = Transparent Rational deriving (Show, Read)
 instance LayoutModifier Transparent Window where
     modifyLayout (Transparent opa) = applyTransp opa
+
+    pureMess (Transparent opa) m
+      | Just (SetOpacity o) <- fromMessage m =
+         Just $ Transparent o
+      | otherwise = Nothing
 
 applyTransp :: (LayoutClass l Window) =>
                Rational
