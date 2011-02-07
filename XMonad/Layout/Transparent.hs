@@ -11,9 +11,7 @@
 -----------------------------------------------------------------------------
 
 module XMonad.Layout.Transparent (
-        applyTransp,
         withTransp,
-        Transparent
     ) where
 
 import XMonad
